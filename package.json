@@ -1,0 +1,38 @@
+{
+  "name": "ibazel-benchmark-runner",
+  "version": "0.1.0",
+  "description": "iBazel Benchmark Runner",
+  "main": "index.js",
+  "scripts": {
+    "format": "git-clang-format",
+    "test": "node index.js //test:devserver test/go.ts --config=ci --url=http://localhost:5432 | tee /tmp/out.txt && grep '\\[ibazel-benchmark-runner\\] Initial build time' /tmp/out.txt && grep '\\[ibazel-benchmark-runner\\] Incremental build RTT' /tmp/out.txt && grep '\\[ibazel-benchmark-runner\\] Browser load RTT' /tmp/out.txt"
+  },
+  "bin": {
+    "ibazel-benchmark-runner": "index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gregmagolan/ibazel-benchmark-runner.git"
+  },
+  "keywords": [
+    "ibazel",
+    "bazel",
+    "benchmark"
+  ],
+  "author": "The Bazel Authors",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/gregmagolan/ibazel-benchmark-runner/issues"
+  },
+  "homepage": "https://github.com/gregmagolan/ibazel-benchmark-runner#readme",
+  "dependencies": {
+    "@bazel/ibazel": "0.3.1",
+    "nomnom": "^1.8.1",
+    "puppeteer": "^0.13.0",
+    "tempy": "^0.2.1"
+  },
+  "devDependencies": {
+    "clang-format": "^1.2.2",
+    "typescript": "2.5.x"
+  }
+}
