@@ -1,0 +1,40 @@
+# Variables
+
+## IMPORTANT
+# If you change the `docker_image` version, also change the `cache_key` suffix and the version of
+# `com_github_bazelbuild_buildtools` in the `/WORKSPACE` file.
+var_1: &docker_image angular/ngcontainer:0.0.8
+var_2: &cache_key angular-{{ .Branch }}-{{ checksum "yarn.lock" }}-0.0.8
+
+# Settings common to each job
+anchor_1: &job_defaults
+  working_directory: ~/ng
+  docker:
+    - image: *docker_image
+
+# After checkout, rebase on top of master.
+# Similar to travis behavior, but not quite the same.
+# See https://discuss.circleci.com/t/1662
+anchor_2: &post_checkout
+  post: git pull --ff-only origin "refs/pull/${CI_PULL_REQUEST//*pull\//}/merge"
+
+version: 2
+jobs:
+  test:
+    <<: *job_defaults
+    steps:
+      - checkout:
+          <<: *post_checkout
+      - restore_cache:
+          key: *cache_key
+      - run: yarn
+      - run: yarn test
+      - save_cache:
+          key: *cache_key
+          paths:
+            - "node_modules"
+workflows:
+  version: 2
+  default_workflow:
+    jobs:
+      - test
