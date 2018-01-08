@@ -28,9 +28,11 @@
   "devDependencies": {
     "@bazel/ibazel": "git+https://github.com/gregmagolan/bazel-watcher#dist-profiler-2",
     "clang-format": "^1.2.1",
+    "typescript": "2.5.x"
+  },
+  "dependencies": {
     "nomnom": "^1.8.1",
     "puppeteer": "^0.13.0",
-    "tempy": "^0.2.1",
-    "typescript": "2.5.x"
+    "tempy": "^0.2.1"
   }
 }
