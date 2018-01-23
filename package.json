@@ -1,5 +1,5 @@
 {
-  "name": "ibazel-benchmark-runner",
+  "name": "@bazel/benchmark-runner",
   "version": "0.1.0",
   "description": "iBazel Benchmark Runner",
   "main": "index.js",
